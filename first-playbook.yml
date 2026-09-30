@@ -1,0 +1,23 @@
+- name: First Ansible practice
+  hosts: local
+
+  vars:
+    greeting: "Hello from Ansible!"
+
+  tasks:
+    - name: Create practice directory
+      ansible.builtin.file:
+        path: /home/micha/ansible-practice/output
+        state: directory
+        mode: '0755'
+
+    - name: Create practice file
+      ansible.builtin.copy:
+        dest: /home/micha/ansible-practice/output/hello.txt
+        content: "{{ greeting }}\n"
+        mode: '0644'
+
+    - name: Remove old practice file
+      ansible.builtin.file:
+        path: /home/micha/ansible-practice/hello.txt
+        state: absent
